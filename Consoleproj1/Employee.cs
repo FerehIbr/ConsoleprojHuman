@@ -33,6 +33,12 @@ namespace Consoleproj1
             }
 
         }
+
+        public Employees(string departmentName)
+        {
+            DepartmentName = departmentName;
+        }
+
         public override string ToString()
         {
             return $"Nomresi: {No}\n Name: {Name} \n Position: {Position} \n Salary: {Salary} \n DepartmentName: {DepartmentName}";

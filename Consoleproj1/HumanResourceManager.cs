@@ -21,9 +21,37 @@ namespace Consoleproj1
 
         public void AddEmployee(Employees[] employees, string Name, string position, double salary, string departmentName)
         {
+            Department department = FindDepartmentByName(departmentName);
+            if (department==null)
+            {
+                Console.WriteLine("sistemde bu adda department movcud deyil");
+            }
+            else if (department.Workerlimit<=department.Employees.Length)
+            {
+                Console.WriteLine("isci elave etmek mumkun deyil");
+            }
+            else if (department.TotalSalary(department)+ salary>department.SalaryLimit)
+            {
+                Console.WriteLine("iscinin maasi limitden artigdi");
+            }
+            else
+            {
+                Employees employees2 = new Employees(departmentName)
+                {
+                    DepartmentName = departmentName,
+                    Name = Name,
+                    Position = position,
+                    Salary = salary
+                };
+            }
             Employees employees1 = new Employees(Name, position, salary, departmentName);
             Array.Resize(ref _employees, _employees.Length + 1);
             _employees[_employees.Length - 1] = employees1;
+        }
+
+        private Department FindDepartmentByName(string departmentName)
+        {
+            throw new NotImplementedException();
         }
 
         public void EditDepartaments(string name,string newname)
@@ -48,6 +76,11 @@ namespace Consoleproj1
                     item.Salary = Salary;
                 }
             }
+        }
+
+        internal bool Checkname(string name)
+        {
+            throw new NotImplementedException();
         }
 
         public Department[] GetDepartments(Department[] departments)
@@ -76,5 +109,7 @@ namespace Consoleproj1
         {
             throw new NotImplementedException();
         }
+
+     
     }
 }

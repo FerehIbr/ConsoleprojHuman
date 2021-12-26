@@ -38,5 +38,9 @@ namespace Consoleproj1
             }
         }
 
+        internal double TotalSalary(Department department)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
