@@ -38,9 +38,20 @@ namespace Consoleproj1
             }
         }
 
+        public Department(string name, int workerlimit, int salaryLimit)
+        {
+            Name = name;
+            Workerlimit = workerlimit;
+            SalaryLimit = salaryLimit;
+        }
+
         internal double TotalSalary(Department department)
         {
             throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return $"Department adi: {Name}\nIshci sayi: {Workerlimit}\nMaas limiti: {SalaryLimit}"; 
         }
     }
 }

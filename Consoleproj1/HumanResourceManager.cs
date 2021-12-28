@@ -12,11 +12,29 @@ namespace Consoleproj1
         public Employees[] employees => employees;
         private Employees[] _employees;
 
-        public void AddDepartment(string name, int workerlimit, int SalaryLimit, Employees[] Employees)
+        public void AddDepartment(string name, int workerlimit, int SalaryLimit)
         {
-            Department department = new Department( name, workerlimit,SalaryLimit,Employees);
+            Department department = new Department( name, workerlimit,SalaryLimit);
             Array.Resize(ref _departments, _departments.Length + 1);
             _departments[_departments.Length - 1] = department;
+        }
+        public bool Checkname(string str)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                if (Char.IsUpper(str[0]))
+                {
+                    foreach (var chr in str)
+                    {
+                        if (char.IsLetter(chr)==false)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void AddEmployee(Employees[] employees, string Name, string position, double salary, string departmentName)
@@ -78,10 +96,10 @@ namespace Consoleproj1
             }
         }
 
-        internal bool Checkname(string name)
-        {
-            throw new NotImplementedException();
-        }
+        //internal bool Checkname(string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public Department[] GetDepartments(Department[] departments)
         {
@@ -98,6 +116,11 @@ namespace Consoleproj1
                     return;
                 }
             }
+        }
+
+        internal void AddDepartment(string name, string workerLimit, string salaryLimit)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddEmployee(string Name, string position, double salary, string departmentName)

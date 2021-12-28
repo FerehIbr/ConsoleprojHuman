@@ -47,10 +47,6 @@ namespace Consoleproj1
                         break;
                 }
             } while (true);
-
-
-
-
             static void AddDepartment(ref HumanResourceManager humanResourceManager)
             {
                 string name;
@@ -67,26 +63,89 @@ namespace Consoleproj1
                     }
                     name = Console.ReadLine();
                     check = false;
-                } while (humanResourceManager.Checkname(name));
-                Console.WriteLine("isci sayini daxil et");
+                } while (!humanResourceManager.Checkname(name));
+                do
+                {
+                    if (check)
+                    {
+                        Console.WriteLine("daxil etdiyiniz department movcuddur.yeniden daxil edin");
+                        name = Console.ReadLine();
+                    }
+                    check = true;
+
+                } while (!humanResourceManager.Checkname(name));
+                Console.WriteLine("isci sayini daxil edin");
+            checkWN:
+                string WorkerLimit = Console.ReadLine();
+                int WorkerLimitNum = 0;
+                while (!int.TryParse(WorkerLimit,out WorkerLimitNum)||WorkerLimitNum<1)
+                {
+                    Console.WriteLine("duzgun daxil edin:");
+                    goto checkWN;
+                }
+            checkSL:
+                string SalaryLimit = Console.ReadLine();
+                int SalaryLimitNum = 0;
+                while (!int.TryParse(SalaryLimit, out SalaryLimitNum) || SalaryLimitNum < 1)
+                {
+                    Console.WriteLine("duzgun daxil edin:");
+                    goto checkSL;
+                }
+
+                humanResourceManager.AddDepartment(name, WorkerLimit, SalaryLimit);
             }
 
-        checkab:
-            string WorkerLimit = Console.ReadLine();
-            int WorkerLimitNum = 0;
-            while (true)
+            static void EditDepartment(ref HumanResourceManager humanResourceManager)
             {
-
+                if (humanResourceManager.Departments.Length<=0)
+                {
+                    Console.WriteLine("once daxil et");
+                    return;
+                }
+                foreach (Department item in humanResourceManager.Departments)
+                {
+                    Console.WriteLine("item");
+                    Console.WriteLine("----------------");
+                }
+                string name = Console.ReadLine();
+                bool CheckDepartmentName = true;
+                Console.WriteLine("deyisiklik edeceyiniz departmenti daxil edin");
+                while (CheckDepartmentName)
+                {
+                    foreach (Department item in humanResourceManager.Departments)
+                    {
+                        if (item.Name.ToLower()==name.ToLower())
+                        {
+                            item.Name = name;
+                        }
+                        else
+                        {
+                            Console.WriteLine("departmentin adini duzgun daxil edin");
+                        }
+                        name = Console.ReadLine();
+                    }
+                }
             }
-
             //Department department = new Department();
             //Console.WriteLine(department);
             //Employees employee = new Employees("Fereh", "Front end", 800, "Developer");
             //Console.WriteLine(employee);
             //Employees employee1 = new Employees("Fereh", "Front end", 800, "Developer");
             //Console.WriteLine(employee1);
-
         }
+        //static void AddEmployee(ref HumanResourceManager humanResourceManager)
+        //{
+        //    if (humanResourceManager.Departments.Length<=0)
+        //    {
+        //        Console.WriteLine("cari department bazasi bosdur.ilk once cari departmenti yazin");
+        //        return;
+        //    }
+        //    Console.WriteLine("elave etmek istediyiniz iscinin ad ve soyadini daxil edin");
+        //    EnterName;
+        //    string name = Console.ReadLine();
+        //    string[] name = name.Split(' ');
+
+        //}
 
         private static void AddDepartment(ref HumanResourceManager humanResourceManager)
         {
